@@ -1,0 +1,15 @@
+Bhushan - Able to sync, update and commit my changes back to github.
+Instructions to sync, update and commit code to itzbhushan/Raxa-JSS.
+
+1. Install git
+Follow the steps in http://help.github.com/win-set-up-git/ to setup git in windows
+For mac follow - http://help.github.com/mac-set-up-git/
+For linux follow - http://help.github.com/linux-set-up-git/
+
+Sync STM repository.
+In windows, start git Bash. 
+1. mkdir stm
+2. cd stm
+3. Clone the stm project using the following command - 
+git clone https://itzbhushan@github.com/itzbhushan/Raxa-JSS.git
+4. cd Raxa-JSS/src/screener
