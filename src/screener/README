@@ -24,3 +24,6 @@ git status -s
 
 Commit changes...
 git commit  -m 'My first commit to the STM module'
+
+Push changes back to github
+git push origin master
