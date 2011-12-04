@@ -1,6 +1,11 @@
 Bhushan - Able to sync, update and commit my changes back to github.
 Instructions to sync, update and commit code to itzbhushan/Raxa-JSS.
 
+Fork from itzbhushan/Raxa-JSS by logging to https://github.com/itzbhushan/Raxa-JSS
+and clicking fork on the top right. This creates *your* own copy of the repo.
+
+Sync, commit changes to your repo. Follow the steps 1 to 6.
+
 1. Install git
 Follow the steps in http://help.github.com/win-set-up-git/ to setup git in windows
 For mac follow - http://help.github.com/mac-set-up-git/
@@ -22,8 +27,13 @@ git add README
 Before commiting check the status using the following command
 git status -s
 
-Commit changes...
+5.Commit changes...
 git commit  -m 'My first commit to the STM module'
 
-Push changes back to github
+6. Push changes back to github
 git push origin master
+
+Once you are confident that your implemenation is sound and is ready for review, 
+goto https://github.com/itzbhushan/Raxa-JSS and send a pull request. Please send a 
+pull request only after the code works fully. Use your own repo for all intermediate
+commits.
