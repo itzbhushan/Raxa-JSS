@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Surgery Setup Screen</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>    
+
+  </head>
+
+  <body>
+  
+    <div id = 'outerBoundary' style = "width: 600px; height: 600px;">
+
+      <div id = 'header'
+        style = "height: 60px; border: 3px solid black; padding: 8px; 
+			        background-image: url(images/brnGradient.png); 
+			        background-repeat: repeat-x;">
+
+        <div style="float:left; padding-right: 6px">
+			    <img src="images/GameLogo1.gif" width="55" height="55"/>
+			  </div>
+
+			  <div>
+			    <span style="font-size: 20px;">Surgery Setup Screen</span>
+			    <br />
+		      Set up a surgery
+		    </div>
+		    
+      </div>
+
+      <div id = 'content'
+          style = "border: 3px solid black; height: 510px;">
+
+        <div id = 'top'
+            style = "height: 120px; padding: 8px; ">
+            Patient Details
+          <div id = 'patient_details'
+              style = "padding: 8px; border: 3px solid black; height: 86px;">
+              <div class = 'name' style = 'float:left;'></div>
+              <div class = 'gender' style = 'float:left;'>&nbsp-&nbsp</div><br>
+              <div class = 'age' style = 'float:left;'>Age: &nbsp</div>
+              <div class = 'birthdate' style = 'float:left;'>&nbsp Birthdate: </div><br>
+              <div class = 'address'>Address: </div>
+              <div class = 'attributes'>Attributes: </div>
+              <!--<div id = 'button2'
+              style = "padding: 8px; border: height: 30px;
+                      float: right; ">
+                <form id = 'get_details'>
+                  <input type = 'submit' value = "Get Patient Details">
+                </form>
+              </div>-->
+          </div>
+        </div>
+
+        <div id = 'left'
+            style = "height: 350px; width: 184px; float: left; 
+                    padding: 8px 0px 8px 8px; ">
+          Patient Surgery Details
+          <div id = 'surgery_details'
+              style = "padding: 8px; height: 316px; 
+                      border: 3px solid black; ">
+                      
+            <div id = 'surgery_date' style = "padding: 6px; ">
+              <form> 
+                Date of surgery:<br>
+                <input type = 'text' name = 'date' />
+              </form>
+            </div>
+
+            <div id = 'surgery_room' style = "padding: 6px; ">
+              <form> 
+                Room Number:<br>
+                <select name = 'room'>
+                  <option value = '1'>Room 1</option>
+                  <option value = '1'>Room 2</option>
+                  <option value = '1'>Room 3</option>
+                  <option value = '1'>Room 4</option>
+                  <option value = '1'>Room 5</option>
+                </select>
+              </form>
+            </div>
+            
+          </div>
+        </div>
+
+        <div id = 'right'
+            style = "height: 350px; width: 384px; float: right;
+                    padding: 8px; ">
+          Surgery Room Status
+          <div id = 'room_status'
+              style = "padding: 8px; border: 3px solid black; height: 266px;">
+            <table cellpadding = '3' border = '1'>
+              <tr>
+                <th>Room No.</th>
+                <th>Available?</th>
+                <th>Description<br>(Opt. - Facilities Available)</th>
+              </tr>
+              <tr>
+                <td>Room 1</td>
+                <td>Yes</td>
+                <td>Description here</td>
+              </tr>
+            </table>
+          </div>
+          <div id = 'button'
+              style = "padding: 8px; border: height: 30px;
+                      float: right; ">
+            <form id = 'confirm'>
+              <input type = 'submit' value = "Confirm Surgery">
+            </form>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+
+    <script type="text/javascript">
+      /**
+      *
+      *  Base64 encode / decode
+      *  http://www.webtoolkit.info/
+      *
+      **/
+       
+      var Base64 = {
+       
+        // private property
+        _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+       
+        // public method for encoding
+        encode : function (input) {
+          var output = "";
+          var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+          var i = 0;
+       
+          input = Base64._utf8_encode(input);
+       
+          while (i < input.length) {
+       
+            chr1 = input.charCodeAt(i++);
+            chr2 = input.charCodeAt(i++);
+            chr3 = input.charCodeAt(i++);
+       
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+            enc4 = chr3 & 63;
+       
+            if (isNaN(chr2)) {
+              enc3 = enc4 = 64;
+            } else if (isNaN(chr3)) {
+              enc4 = 64;
+            }
+       
+            output = output +
+            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+       
+          }
+       
+          return output;
+        },
+       
+        // public method for decoding
+        decode : function (input) {
+          var output = "";
+          var chr1, chr2, chr3;
+          var enc1, enc2, enc3, enc4;
+          var i = 0;
+       
+          input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+       
+          while (i < input.length) {
+       
+            enc1 = this._keyStr.indexOf(input.charAt(i++));
+            enc2 = this._keyStr.indexOf(input.charAt(i++));
+            enc3 = this._keyStr.indexOf(input.charAt(i++));
+            enc4 = this._keyStr.indexOf(input.charAt(i++));
+       
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
+       
+            output = output + String.fromCharCode(chr1);
+       
+            if (enc3 != 64) {
+              output = output + String.fromCharCode(chr2);
+            }
+            if (enc4 != 64) {
+              output = output + String.fromCharCode(chr3);
+            }
+       
+          }
+       
+          output = Base64._utf8_decode(output);
+       
+          return output;
+       
+        },
+       
+        // private method for UTF-8 encoding
+        _utf8_encode : function (string) {
+          string = string.replace(/\r\n/g,"\n");
+          var utftext = "";
+       
+          for (var n = 0; n < string.length; n++) {
+       
+            var c = string.charCodeAt(n);
+       
+            if (c < 128) {
+              utftext += String.fromCharCode(c);
+            }
+            else if((c > 127) && (c < 2048)) {
+              utftext += String.fromCharCode((c >> 6) | 192);
+              utftext += String.fromCharCode((c & 63) | 128);
+            }
+            else {
+              utftext += String.fromCharCode((c >> 12) | 224);
+              utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+              utftext += String.fromCharCode((c & 63) | 128);
+            }
+       
+          }
+       
+          return utftext;
+        },
+       
+        // private method for UTF-8 decoding
+        _utf8_decode : function (utftext) {
+          var string = "";
+          var i = 0;
+          var c = c1 = c2 = 0;
+       
+          while ( i < utftext.length ) {
+       
+            c = utftext.charCodeAt(i);
+       
+            if (c < 128) {
+              string += String.fromCharCode(c);
+              i++;
+            }
+            else if((c > 191) && (c < 224)) {
+              c2 = utftext.charCodeAt(i+1);
+              string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+              i += 2;
+            }
+            else {
+              c2 = utftext.charCodeAt(i+1);
+              c3 = utftext.charCodeAt(i+2);
+              string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+              i += 3;
+            }
+       
+          }
+       
+          return string;
+        }
+     
+      }
+    </script>
+    <script>
+
+        $(document).ready(function() {
+
+          // make original call to database
+          var response = call_original('100-8');
+
+          /*PATIENT*/
+
+          // display patient information from database
+          // TODO: carry information about subject from previous page
+          $('.name').append('<strong>' + response.preferredName.display + '</strong>');
+          $('.gender').append('(' + response.gender + ')');
+          $('.age').append(response.age);
+          $('.birthdate').append(response.birthdate);
+          $('.address').append(response.preferredAddress.display);
+          $('.attributes').append(response.attributes[0].display + '; ' + response.attributes[1].display);
+
+          // TODO: display date of scheduled surgery
+
+          /*ROOMS*/
+
+          // TODO: display status of surgery rooms (GET)
+
+          /*CONFIRM*/
+
+          $('#confirm').bind('click', function(event) {
+
+            // Alert: Surgery Confirmed
+            alert('Surgery Confirmed!');
+
+            // TODO: Send information of Confirmed Surgery
+
+                // Update patient information (POST)
+
+                // Update status of surgery rooms (POST)
+
+            // Redirect to allocate patient screen
+            // TODO: determine url of redirect
+            redirect('http://www.google.com');
+            return false;
+            
+          });     
+          
+        });
+
+        // function used to redirect the page
+        function redirect(dest) {
+              window.location.href = dest;
+        }
+
+        // function used to open raxa database
+        function call_original(num) {
+          
+          // create and execute XMLHttpRequest
+          var request = new XMLHttpRequest();
+          request.open(
+            'GET', 
+            ('http://raxaemr.jelastic.servint.net/openmrs/ws/rest/v1/patient?q='+num),
+            false
+          );
+          request.setRequestHeader('Authorization', 'Basic YWRtaW46SGVsbG8xMjM=');
+          request.send(null);
+
+          // if call successful, 
+            // parse response into JSON object
+            // go deeper into database and return JSON object
+          if (request.status === 200) {
+            var response = jQuery.parseJSON(request.responseText);
+            response2 = call_details(response.results[0].links[0].uri);
+            return response2;
+          }
+          // else, display error message
+          else {
+            alert('Data load unsuccessful, please try again!');
+          }
+          
+        }
+
+        /* FUNCTIONS */
+  
+        // function used to call patient details
+        function call_details(uri) {
+          
+          // create and execute XMLHttpRequest
+          var request = new XMLHttpRequest();
+          request.open('GET', uri, false);
+          request.send(null);
+
+          // parse response into JSON object
+          var response = jQuery.parseJSON(request.responseText);
+
+          // if call successful, parse and return JSON object
+          if (request.status === 200) {
+            return response;
+          }
+          // else display error message
+          else {
+            alert('Data load unsuccessful, please try again! #2');
+          }
+          
+        }
+
+    </script>
+    
+  </body>
+
+</html>
